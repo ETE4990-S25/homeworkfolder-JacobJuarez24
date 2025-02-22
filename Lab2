@@ -1,0 +1,80 @@
+#Part 1
+x = 5
+y = int(input("Enter a number: "))
+
+print(f"{x} is", end=" ")
+if x < y:
+    print("less than", end=" ")
+elif x == y:
+    print("equal to", end=" ")
+else:
+    print("more than", end=" ")
+print(f"{y}")
+
+#Part 2
+import random
+
+# Function to roll a dice and return a random value between 1 and 6
+def roll_dice():
+    return random.randint(1, 6)
+
+# Function to simulate a round of dice rolling between the user and the computer
+def play_round(user_score, computer_score, user_rolls, computer_rolls):
+    user_roll = roll_dice()
+    computer_roll = roll_dice()
+
+    user_rolls.append(user_roll)
+    computer_rolls.append(computer_roll)
+
+    print("You rolled:", user_roll)
+    print("Computer rolled:", computer_roll)
+
+    if user_roll > computer_roll:
+        print("Hell yeah, you win! Stupid Computer\n\n")
+        user_score += 1
+    elif user_roll < computer_roll:
+        print("Your bloodline is weak! You lose\n\n")
+        computer_score += 1
+    else:
+        print("You tied!!! \n \t For now...\n")
+
+    return user_score, computer_score, user_rolls, computer_rolls
+
+# Main function to play the dice rolling game
+def dice_rolling_game():
+    user_score = 0
+    computer_score = 0
+    user_rolls = []
+    computer_rolls = []
+
+    print("Welcome to the Dice Rolling Game! \nYou and the computer will roll the dice, and the one with the highest number wins\n")
+
+    while True:
+        input("Press enter to roll the dice...")
+
+        # Play one round and update scores and rolls
+        user_score, computer_score, user_rolls, computer_rolls = play_round(user_score, computer_score, user_rolls, computer_rolls)
+
+        play_again = input("Do you want to play again? (y/n): ").lower()
+        if play_again != "y":
+            print("Final Score: User vs Computer ", user_score, " to ", computer_score)
+            print("Your rolls were:", user_rolls)
+            print("Computer rolls were:", computer_rolls)
+            print("\nThanks for playing!!!")
+            break
+
+# Function to roll a custom number of dice with optional "magic" modification
+def roll_custom_dice(a, b, **c):
+    if a > 1:
+        rolls = [random.randint(1, b) for _ in range(a)]
+        print(f"Rolled {a} dice: {rolls}")
+        return rolls
+    else:
+        magic_value = c.get("magic", 0)
+        result = a + magic_value
+        print(f"Result with magic: {result}")
+        return result
+
+# To start the game
+if __name__ == "__main__":
+    dice_rolling_game()
