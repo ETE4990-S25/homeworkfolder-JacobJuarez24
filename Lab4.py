@@ -14,7 +14,7 @@ def load_dataset(file_path):
 #Function for user to pick movie 
 def pick_movie(data, min_rating, max year):
     if isinstance(data, str):
-        return data #return the error message if loadin data failed
+        return data #return the error message if loading data failed
         
     filter_movies = []
 
