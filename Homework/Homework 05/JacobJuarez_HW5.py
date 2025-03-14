@@ -79,18 +79,6 @@ plt.title("3D Bar Plot")
 plt.show()
 
 ## Part 2
-test_data = np.array([
-    ("Billy", 32, 6),
-    ("Bob", 15, 20),
-    ("Jo", 80, 100),
-    ("Goku", 38, 9001),],
-    dtype=[("name", str, 10), 
-           ("age", int), 
-           ("power", int)])
-
-# Display the first 5 rows of test data
-print("First 5 rows of test data:")
-print(test_data[:5])
 
 # Define the dtype for the structured array
 dtype = [
@@ -99,9 +87,14 @@ dtype = [
     ('NA_Sales', 'f4'), # North America sales as a float
 ]
 
-# Load data from CSV file
-game_sales_data = np.genfromtxt('video_game_sales.csv', delimiter=',', skip_header=1, dtype=dtype, 
-                                usecols=(1, 2, 3))
+# Load data from the CSV file
+game_sales_data = np.genfromtxt(
+    'video_game_sales.csv', 
+    delimiter=',',  # Change this delimiter if the file uses something else
+    skip_header=1,  # Skip the header row
+    dtype=dtype,    # Use the defined dtype to parse the columns
+    usecols=(1, 2, 9)  # Columns 1, 2, and 59 are Name, Year, and NA_Sales
+)
 
 # Display the first few rows to verify
 print("First 5 rows of original data:")
